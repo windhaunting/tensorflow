@@ -92,7 +92,7 @@ bn = tf.contrib.layers.batch_norm(
   
 脚本中包含下面三个变量分布和累积的例子：  
   
-* `parameter_server` 中每个训练模型的副本从参数服务器中读取变量，然后独立的更新。当每个模型需要这些变量时，它们通过 TensorFlow 运行时间加入的标准隐式拷贝被复制。这些例子在 [脚本]((https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks) 中解释了使用这些方法来做本地训练，分布式同步训练和分布式异步训练。  
+* `parameter_server` 中每个训练模型的副本从参数服务器中读取变量，然后独立的更新。当每个模型需要这些变量时，它们通过 TensorFlow 运行时间加入的标准隐式拷贝被复制。这些例子在 [脚本](https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks) 中解释了使用这些方法来做本地训练，分布式同步训练和分布式异步训练。  
   
 * `replicated` 放置每个相同训练变量到每个 GPU 中。当变量数据立即可用时，前向和后向计算就能立即开始。梯度沿着所有 GPU 被累积，累积总和应用到每个 GPU 的变量拷贝来保持同步。  
   
