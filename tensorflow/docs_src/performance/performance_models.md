@@ -1,5 +1,6 @@
-# 高性能模型
-  本篇文档和伴随的【脚本】(https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks) 详细记述了怎样构建以多种系统类型和网络拓扑为目标的高度伸缩性模型。本文档中的技术使用了一些低级的 TensorFlow Python 原型。将来，高级 API (应用程序接口) 会包含这些中的许多技术。
+# 高性能模型  
+  
+本篇文档和伴随的【脚本】(https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks) 详细记述了怎样构建以多种系统类型和网络拓扑为目标的高度伸缩性模型。本文档中的技术使用了一些低级的 TensorFlow Python 原型。将来，高级 API (应用程序接口) 会包含这些中的许多技术。
 
 ## 输入流水线
 
