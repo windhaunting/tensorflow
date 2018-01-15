@@ -1,13 +1,8 @@
 # 高性能模型  
-
-本篇文档和伴随的【脚本】(https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks) 详细记述了怎样构建以多种系统类型和网络拓扑为目标的高度伸缩性模型。本文档中的技术使用了一些低级的 TensorFlow Python 原型。将来，高级 API (应用程序接口) 会包含这些中的许多技术。
-
-## 输入流水线
-
-这篇指南 (@{$performance_guide$Performance Guide}) 解释了怎样识别可能的输入流水线问题以及最好的实践方法。我们发现使用很大的输入和每秒高采样处理，比如用 [AlexNet](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf) 来训练 ImageNet, @{tf.FIFOQueue} 和 @{tf.train.queue_runner} 不能充分饱和的使用多个当代 GPU。原因是由于使用了底层的 Python 线程实现，而 Python 线程开销太大。
-
-另外一个方法， 我们已实现在这个【脚本】(https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks) 里，它是通过使用 TensorFlow 的原始并行化来构建一个输入流水线。我们的实现由 3 个阶段构成：
-
+本篇文档和伴随的【脚本】(https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks) 详细记述了怎样构建以多种系统类型和网络拓扑为目标的高度伸缩性模型。本文档中的技术使用了一些低级的 TensorFlow Python 原型。将来，高级 API (应用程序接口) 会包含这些中的许多技术。  
+## 输入流水线  
+这篇指南 (@{$performance_guide$Performance Guide}) 解释了怎样识别可能的输入流水线问题以及最好的实践方法。我们发现使用很大的输入和每秒高采样处理，比如用 [AlexNet](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf) 来训练 ImageNet, @{tf.FIFOQueue} 和 @{tf.train.queue_runner} 不能充分饱和的使用多个当代 GPU。原因是由于使用了底层的 Python 线程实现，而 Python 线程开销太大。  
+另外一个方法， 我们已实现在这个【脚本】(https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks) 里，它是通过使用 TensorFlow 的原始并行化来构建一个输入流水线。我们的实现由 3 个阶段构成：  
 * 输入/输出读取： 从磁盘中选择并读取图像文件。
 * 图像处理： 解码图像记录到图像，预处理后组织到小批量中。
 * CPU 到 GPU 输入转换： 从 CPU 转换图像 到 GPU 中。
